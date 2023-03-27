@@ -1,0 +1,33 @@
+{
+  "name": "test-npm-package",
+  "version": "1.0.1",
+  "type": "module",
+  "main": "./dist/cjs/index.js",
+  "exports": {
+    ".": {
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js"
+    }
+  },
+  "author": "jasonsmith",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/cli": "^7.21.0",
+    "@babel/core": "^7.21.3",
+    "@babel/preset-env": "^7.20.2",
+    "@babel/preset-react": "^7.18.6",
+    "@babel/preset-typescript": "^7.21.0",
+    "@types/react": "^18.0.29",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-is": "^18.2.0",
+    "typescript": "^5.0.2"
+  },
+  "scripts": {
+    "check-types": "tsc --noEmit",
+    "clean": "rm -rf dist",
+    "build": "yarn run clean && yarn run build:cjs && yarn run build:esm",
+    "build:cjs": "MODULE=commonjs babel src --out-dir dist/cjs --extensions \".js,.jsx,.ts,.tsx\"",
+    "build:esm": "MODULE=esm babel src --out-dir dist/esm --extensions \".js,.jsx,.ts,.tsx\""
+  }
+}
